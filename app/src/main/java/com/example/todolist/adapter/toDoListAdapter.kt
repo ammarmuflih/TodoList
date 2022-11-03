@@ -28,21 +28,21 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         this.todoList = todoList
     }
 
-    inner class todoViewHolder(view: View, listener: onItemClickListener):RecyclerView.ViewHolder(view) {
+    inner class todoViewHolder(view: View):RecyclerView.ViewHolder(view) {
         var title = view.findViewById<TextView>(R.id.doTitle)
         var detail = view.findViewById<TextView>(R.id.doDetail)
         var checkBox = view.findViewById<CheckBox>(R.id.checkBox)
 
-        init{
-            itemView.setOnClickListener {
-                listener.onItemClick(adapterPosition)
-            }
-        }
+//        init{
+//            itemView.setOnClickListener {
+//                listener.onItemClick(adapterPosition)
+//            }
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): todoViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.card_layout, parent, false)
-        return todoViewHolder(view, mListener)
+        return todoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: todoViewHolder, position: Int) {

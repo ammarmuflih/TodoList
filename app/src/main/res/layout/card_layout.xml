@@ -19,6 +19,7 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +27,7 @@
             android:id="@+id/doTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="Title"
             android:textSize="30sp"
             app:layout_constraintLeft_toRightOf="@id/checkBox"
@@ -35,6 +37,7 @@
             android:id="@+id/doDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:text="Detail"
             android:textSize="20dp"
