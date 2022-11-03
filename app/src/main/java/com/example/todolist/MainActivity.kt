@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         dbhandler = databaseHelper(this)
         recycler_todo = findViewById(R.id.recyclerViewList)
+        fetchList()
     }
 
     private fun toAddTodoActivity(){
