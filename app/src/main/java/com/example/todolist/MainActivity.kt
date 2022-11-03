@@ -3,6 +3,7 @@ package com.example.todolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.adapter.toDoListAdapter
@@ -29,6 +30,15 @@ class MainActivity : AppCompatActivity() {
         dbhandler = databaseHelper(this)
         recycler_todo = findViewById(R.id.recyclerViewList)
         fetchList()
+    }
+
+    fun setupRecyclerAdapter(){
+        recycler_todo.adapter = todolistAdapter
+        recycler_todo.layoutManager = LinearLayoutManager(applicationContext)
+
+        todolistAdapter?.onItemClick = { todoList ->
+            Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun toAddTodoActivity(){

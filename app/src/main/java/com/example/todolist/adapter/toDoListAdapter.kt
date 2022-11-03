@@ -1,6 +1,7 @@
 package com.example.todolist.adapter
 
 import android.content.Context
+import android.provider.ContactsContract.Contacts
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +12,6 @@ import com.example.todolist.R
 import com.example.todolist.model.todoListModel
 
 class toDoListAdapter(todoList : List<todoListModel>, internal var context : Context):RecyclerView.Adapter<toDoListAdapter.todoViewHolder>() {
-
-    //Item Click Listener
-    private lateinit var mListener : onItemClickListener
-
-    interface onItemClickListener{
-        fun onItemClick(position: Int)
-    }
-
-    fun setOnItemClickListener(listener: onItemClickListener){
-        mListener = listener
-    }
     //
     internal var todoList : List<todoListModel> = ArrayList()
     init {
@@ -32,12 +22,6 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         var title = view.findViewById<TextView>(R.id.doTitle)
         var detail = view.findViewById<TextView>(R.id.doDetail)
         var checkBox = view.findViewById<CheckBox>(R.id.checkBox)
-
-//        init{
-//            itemView.setOnClickListener {
-//                listener.onItemClick(adapterPosition)
-//            }
-//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): todoViewHolder {
