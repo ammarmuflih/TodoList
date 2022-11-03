@@ -33,4 +33,9 @@ class MainActivity : AppCompatActivity() {
     private fun fetchList(){
         todoList = dbhandler!!.getAllToDoList()
     }
+
+    private fun testPush(){
+        //code here
+    }
 }
+
