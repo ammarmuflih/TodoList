@@ -32,15 +32,6 @@ class MainActivity : AppCompatActivity() {
         fetchList()
     }
 
-    fun setupRecyclerAdapter(){
-        recycler_todo.adapter = todolistAdapter
-        recycler_todo.layoutManager = LinearLayoutManager(applicationContext)
-
-        todolistAdapter?.onItemClick = { todoList ->
-            Toast.makeText(applicationContext, "Clicked", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun toAddTodoActivity(){
         intent = Intent(this, addTodo::class.java)
         startActivity(intent)
@@ -54,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         recycler_todo.adapter = todolistAdapter
         todolistAdapter?.notifyDataSetChanged()
     }
+
+    //pushtest
 
 }
 
