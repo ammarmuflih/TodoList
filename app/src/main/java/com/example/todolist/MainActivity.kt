@@ -44,6 +44,16 @@ class MainActivity : AppCompatActivity() {
         recycler_todo.layoutManager = linearlayoutManager
         recycler_todo.adapter = todolistAdapter
         todolistAdapter?.notifyDataSetChanged()
+
+        todolistAdapter!!.setOnItemClickCallback(object : toDoListAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: todoListModel) {
+                showSelected()
+            }
+        })
+    }
+
+    private fun showSelected(){
+        Toast.makeText(this,"TerClick", Toast.LENGTH_SHORT).show()
     }
 
     //pushtest falala

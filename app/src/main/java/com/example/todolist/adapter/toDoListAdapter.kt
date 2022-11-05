@@ -7,11 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
 import com.example.todolist.model.todoListModel
 
 class toDoListAdapter(todoList : List<todoListModel>, internal var context : Context):RecyclerView.Adapter<toDoListAdapter.todoViewHolder>() {
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback
+    }
     //
     internal var todoList : List<todoListModel> = ArrayList()
     init {
@@ -34,9 +40,16 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         holder.title.text = todo.title
         holder.detail.text = todo.detail
         //checkbox
+        holder.itemView.setOnClickListener{
+            Toast.makeText(holder.itemView.context,"Clicked Task Number"+todoList[position].id, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {
         return todoList.size
+    }
+
+    interface OnItemClickCallback{
+        fun onItemClicked(data: todoListModel)
     }
 }
