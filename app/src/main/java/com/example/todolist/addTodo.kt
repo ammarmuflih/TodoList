@@ -3,24 +3,37 @@ package com.example.todolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.todolist.database.databaseHelper
 import com.example.todolist.databinding.ActivityAddTodoBinding
 import com.example.todolist.model.todoListModel
-import java.util.concurrent.BlockingDeque
 
 class addTodo : AppCompatActivity() {
 
     lateinit var binding: ActivityAddTodoBinding
     var dbHandler: databaseHelper? = null
-    var isEditMode: Boolean = false
+    var isEdit: Boolean = false
+    var data_id: Int = 0
+    var title = "Add Activity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTodoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        isEdit = intent.getBooleanExtra("IS_EDIT", isEdit)
+        data_id = intent.getIntExtra("DATA_ID", data_id)
         dbHandler = databaseHelper(this)
+        if(isEdit){
+            title = "Edit"
+            setActionBarTitle(title)
+            val todo = dbHandler!!.getTodo(data_id)
+            binding.titleEditText.setText(todo.title)
+            binding.detailEditText.setText(todo.detail)
+        }else{
+            setActionBarTitle(title)
+            binding.saveToDoButton.setOnClickListener { insertTodo() }
+        }
 
 //        if (intent != null && intent.getStringExtra("Mode") == "E") {
 //            //Update data
@@ -36,7 +49,7 @@ class addTodo : AppCompatActivity() {
 //                binding.saveToDoButton.setOnClickListener { insertTodo() }
 //            }
 //        }
-        binding.saveToDoButton.setOnClickListener { insertTodo() }
+//        binding.saveToDoButton.setOnClickListener { insertTodo() }
     }
 
     private fun insertTodo(){
@@ -54,8 +67,14 @@ class addTodo : AppCompatActivity() {
         }else{
             Toast.makeText(applicationContext, "Something went Wrong!", Toast.LENGTH_SHORT).show()
         }
+    }
 
+    private fun setActionBarTitle(title: String){
+        supportActionBar?.title = title
+    }
 
+    private fun updateTodo(){
+        //update data
     }
 }
 

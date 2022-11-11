@@ -3,6 +3,8 @@ package com.example.todolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,10 +21,13 @@ class MainActivity : AppCompatActivity() {
     var dbhandler : databaseHelper ?= null
     var todoList : List<todoListModel> = ArrayList<todoListModel>()
     var linearlayoutManager : LinearLayoutManager ?= null
+    var title = "To Do List"
+    var isEdit : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        setActionBarTitle(title)
         setContentView(binding.root)
 
         binding.addTodoButton.setOnClickListener{ toAddTodoActivity()}
@@ -30,6 +35,25 @@ class MainActivity : AppCompatActivity() {
         dbhandler = databaseHelper(this)
         recycler_todo = findViewById(R.id.recyclerViewList)
         fetchList()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if (id == R.id.action_one){
+            deleteallTodo()
+            Toast.makeText(this,"Action one selected", Toast.LENGTH_SHORT).show()
+            return true
+        }
+        if(id == R.id.action_two){
+            Toast.makeText(this,"Action two selected", Toast.LENGTH_SHORT).show()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun toAddTodoActivity(){
@@ -45,16 +69,26 @@ class MainActivity : AppCompatActivity() {
         recycler_todo.adapter = todolistAdapter
         todolistAdapter?.notifyDataSetChanged()
 
-        todolistAdapter!!.setOnItemClickCallback(object : toDoListAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: todoListModel) {
-                showSelected()
-            }
-        })
+//        todolistAdapter!!.setOnItemClickCallback(object : toDoListAdapter.OnItemClickCallback{
+//            override fun onItemClicked(data: todoListModel) {
+//                showSelected()
+//            }
+//        })
     }
 
-    private fun showSelected(){
-        Toast.makeText(this,"TerClick", Toast.LENGTH_SHORT).show()
+//    private fun showSelected(){
+//        Toast.makeText(this,"TerClick", Toast.LENGTH_SHORT).show()
+//    }
+
+    private fun setActionBarTitle(title: String){
+        supportActionBar?.title = title
     }
+
+    private fun deleteallTodo(){
+        //
+    }
+
+
 
     //pushtest falala
 }

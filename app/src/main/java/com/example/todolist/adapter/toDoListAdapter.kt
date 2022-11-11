@@ -1,6 +1,7 @@
 package com.example.todolist.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.provider.ContactsContract.Contacts
 import android.view.LayoutInflater
 import android.view.View
@@ -9,15 +10,17 @@ import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.MainActivity
 import com.example.todolist.R
+import com.example.todolist.addTodo
 import com.example.todolist.model.todoListModel
 
 class toDoListAdapter(todoList : List<todoListModel>, internal var context : Context):RecyclerView.Adapter<toDoListAdapter.todoViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
-        this.onItemClickCallback = onItemClickCallback
-    }
+//    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+//        this.onItemClickCallback = onItemClickCallback
+//    }
     //
     internal var todoList : List<todoListModel> = ArrayList()
     init {
@@ -41,7 +44,16 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         holder.detail.text = todo.detail
         //checkbox
         holder.itemView.setOnClickListener{
-            Toast.makeText(holder.itemView.context,"Clicked Task Number"+todoList[position].id, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(holder.itemView.context,"Clicked Task Number"+todoList[position].id, Toast.LENGTH_SHORT).show()
+            val isEdit = true
+            val DATA_ID = todoList[position].id
+            val context=holder.title.context
+            val intent = Intent(context, addTodo::class.java).also {
+                it.putExtra("IS_EDIT", isEdit)
+                it.putExtra("DATA_ID", DATA_ID)
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
         }
     }
 
