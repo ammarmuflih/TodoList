@@ -35,20 +35,9 @@ class addTodo : AppCompatActivity() {
             binding.saveToDoButton.setOnClickListener { insertTodo() }
         }
 
-//        if (intent != null && intent.getStringExtra("Mode") == "E") {
-//            //Update data
-//        } else {
-//            //Insert new data
-//        }
-//
-//        binding.saveToDoButton.setOnClickListener {
-//            if (isEditMode) {
-//                //Update
-//            } else {
-//                //Insert
-//                binding.saveToDoButton.setOnClickListener { insertTodo() }
-//            }
-//        }
+        if(isEdit){
+            binding.saveToDoButton.setOnClickListener { updateTodo(data_id) }
+        }
 //        binding.saveToDoButton.setOnClickListener { insertTodo() }
     }
 
@@ -73,8 +62,22 @@ class addTodo : AppCompatActivity() {
         supportActionBar?.title = title
     }
 
-    private fun updateTodo(){
-        //update data
+    private fun updateTodo(id: Int){
+        var success : Boolean = false
+        val todo : todoListModel = todoListModel()
+        todo.id = intent.getIntExtra("DATA_ID", 0)
+        todo.title = binding.titleEditText.text.toString()
+        todo.detail = binding.detailEditText.text.toString()
+
+        success = dbHandler?.updateTodo(todo) as Boolean
+
+        if(success){
+            val i = Intent(applicationContext,MainActivity::class.java)
+            startActivity(i)
+            finish()
+        }else{
+            Toast.makeText(applicationContext,"Something when wrong",Toast.LENGTH_SHORT).show()
+        }
     }
 }
 
