@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.action_one){
+        if (id == R.id.resetAll){
             deleteallTodo()
             Toast.makeText(this,"Action one selected", Toast.LENGTH_SHORT).show()
             return true
@@ -85,11 +85,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun deleteallTodo(){
-        //
+        dbhandler?.reset()
+        fetchList()
     }
-
-
-
-    //pushtest falala
 }
 

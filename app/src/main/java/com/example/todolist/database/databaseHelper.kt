@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.os.FileObserver.DELETE
 import com.example.todolist.model.todoListModel
 
 class databaseHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION){
@@ -93,5 +94,11 @@ class databaseHelper(context: Context): SQLiteOpenHelper(context, DB_NAME, null,
         val _success = db.update(TABLE_NAME, values, ID + "=?", arrayOf(todo.id.toString())).toLong()
         db.close()
         return Integer.parseInt("$_success") != -1
+    }
+
+    fun reset(){
+        val db = writableDatabase
+        db.execSQL("DELETE FROM $TABLE_NAME")
+        db.close()
     }
 }
