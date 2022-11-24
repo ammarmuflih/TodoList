@@ -55,6 +55,10 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
+
+        if(holder.checkBox.isChecked){
+            Toast.makeText(holder.itemView.context,"Checked", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount(): Int {

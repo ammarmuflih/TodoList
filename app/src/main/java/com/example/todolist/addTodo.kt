@@ -32,13 +32,18 @@ class addTodo : AppCompatActivity() {
             binding.detailEditText.setText(todo.detail)
         }else{
             setActionBarTitle(title)
-            binding.saveToDoButton.setOnClickListener { insertTodo() }
+            binding.saveToDoButton.setOnClickListener {
+                if(binding.titleEditText.text.isEmpty() or binding.detailEditText.text.isEmpty()){
+                    Toast.makeText(this, "Isi data dengan benar", Toast.LENGTH_SHORT).show()
+                }else {
+                    insertTodo()
+                }
+            }
         }
 
         if(isEdit){
             binding.saveToDoButton.setOnClickListener { updateTodo(data_id) }
         }
-//        binding.saveToDoButton.setOnClickListener { insertTodo() }
     }
 
     private fun insertTodo(){
@@ -80,4 +85,3 @@ class addTodo : AppCompatActivity() {
         }
     }
 }
-
