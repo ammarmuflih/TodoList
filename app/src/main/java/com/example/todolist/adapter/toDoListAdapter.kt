@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.MainActivity
 import com.example.todolist.R
@@ -56,7 +57,7 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
                 holder.checkBox.isChecked = true
                 checkBoxStateArray.put(position, true)
                 Toast.makeText(holder.checkBox.context, "Checked"+todoList[position].id, Toast.LENGTH_SHORT).show()
-//                deleteSelected(todoList[position].id, holder.title.context)
+                deleteSelected(todoList[position].id, holder.title.context)
             }else{
                 holder.checkBox.isChecked = false
                 checkBoxStateArray.put(position, false)
@@ -73,12 +74,33 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         fun onItemClicked(data: todoListModel)
     }
 
-//    fun deleteSelected(id: Int, context: Context){
-//        var dbhandler : databaseHelper ?= null
-//        var success : Boolean = false
-//        val todo : todoListModel = todoListModel()
-//        success = dbhandler?.deleteTodo(id) as Boolean
-//    }
+    fun deleteSelected(id: Int, context: Context){
+        lateinit var recycler_todo : RecyclerView
+        var dbhandler : databaseHelper ?= null
+        var todolistAdapter : toDoListAdapter ?= null
+        var linearlayoutManager : LinearLayoutManager?= null
+        var success : Boolean = false
+        val todo : todoListModel = todoListModel()
+        dbhandler?.deleteTodo(id)
+
+//        todoList = dbhandler!!.getAllToDoList()
+//        todolistAdapter = toDoListAdapter(todoList, context)
+//        linearlayoutManager = LinearLayoutManager(context)
+//        recycler_todo.layoutManager = linearlayoutManager
+//        recycler_todo.adapter = todolistAdapter
+//        todolistAdapter?.notifyDataSetChanged()
+
+//        if (success){
+//            todoList = dbhandler!!.getAllToDoList()
+//            todolistAdapter = toDoListAdapter(todoList, context)
+//            linearlayoutManager = LinearLayoutManager(context)
+//            recycler_todo.layoutManager = linearlayoutManager
+//            recycler_todo.adapter = todolistAdapter
+//            todolistAdapter?.notifyDataSetChanged()
+//        }else{
+//            Toast.makeText(context,"Someting wrong", Toast.LENGTH_SHORT).show()
+//        }
+    }
 
     fun updateSelected(id: Int, context: Context){
         val isEdit = true
