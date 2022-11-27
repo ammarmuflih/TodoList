@@ -84,4 +84,11 @@ class addTodo : AppCompatActivity() {
             Toast.makeText(applicationContext,"Something when wrong",Toast.LENGTH_SHORT).show()
         }
     }
+
+    override fun onBackPressed(){
+        Toast.makeText(this, "Back button pressed", Toast.LENGTH_SHORT).show()
+        val i = Intent(applicationContext, MainActivity::class.java)
+        startActivity(i)
+        finish()
+    }
 }

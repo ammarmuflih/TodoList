@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     private fun toAddTodoActivity(){
         intent = Intent(this, addTodo::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun fetchList(){
