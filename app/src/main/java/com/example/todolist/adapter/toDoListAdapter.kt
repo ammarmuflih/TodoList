@@ -3,6 +3,7 @@ package com.example.todolist.adapter
 import android.content.Context
 import android.content.Intent
 import android.provider.ContactsContract.Contacts
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         val todo = todoList[position]
         holder.title.text = todo.title
         holder.detail.text = todo.detail
+        var checkBoxStateArray = SparseBooleanArray()
         //checkbox
         holder.itemView.setOnClickListener{
 //            Toast.makeText(holder.itemView.context,"Clicked Task Number"+todoList[position].id, Toast.LENGTH_SHORT).show()
@@ -56,8 +58,16 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
             context.startActivity(intent)
         }
 
-        if(holder.checkBox.isChecked){
-            Toast.makeText(holder.itemView.context,"Checked", Toast.LENGTH_SHORT).show()
+        holder.checkBox.setOnClickListener {
+            if (!checkBoxStateArray.get(position, false)){
+                holder.checkBox.isChecked = true
+                checkBoxStateArray.put(position, true)
+                Toast.makeText(holder.checkBox.context, "Checked", Toast.LENGTH_SHORT).show()
+            }else{
+                holder.checkBox.isChecked = false
+                checkBoxStateArray.put(position, false)
+                Toast.makeText(holder.checkBox.context, "unChecked", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

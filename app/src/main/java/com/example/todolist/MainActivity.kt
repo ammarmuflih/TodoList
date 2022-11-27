@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
         if (id == R.id.resetAll){
             deleteallTodo()
-            Toast.makeText(this,"Action one selected", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Reseted", Toast.LENGTH_SHORT).show()
             return true
         }
         if(id == R.id.action_two){
