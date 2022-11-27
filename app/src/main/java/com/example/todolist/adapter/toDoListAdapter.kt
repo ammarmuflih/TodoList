@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.MainActivity
 import com.example.todolist.R
 import com.example.todolist.addTodo
+import com.example.todolist.database.databaseHelper
 import com.example.todolist.model.todoListModel
 
 class toDoListAdapter(todoList : List<todoListModel>, internal var context : Context):RecyclerView.Adapter<toDoListAdapter.todoViewHolder>() {
@@ -47,22 +48,15 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         //checkbox
         holder.itemView.setOnClickListener{
 //            Toast.makeText(holder.itemView.context,"Clicked Task Number"+todoList[position].id, Toast.LENGTH_SHORT).show()
-            val isEdit = true
-            val DATA_ID = todoList[position].id
-            val context=holder.title.context
-            val intent = Intent(context, addTodo::class.java).also {
-                it.putExtra("IS_EDIT", isEdit)
-                it.putExtra("DATA_ID", DATA_ID)
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
+            updateSelected(todoList[position].id, holder.title.context)
         }
 
         holder.checkBox.setOnClickListener {
             if (!checkBoxStateArray.get(position, false)){
                 holder.checkBox.isChecked = true
                 checkBoxStateArray.put(position, true)
-                Toast.makeText(holder.checkBox.context, "Checked", Toast.LENGTH_SHORT).show()
+                Toast.makeText(holder.checkBox.context, "Checked"+todoList[position].id, Toast.LENGTH_SHORT).show()
+//                deleteSelected(todoList[position].id, holder.title.context)
             }else{
                 holder.checkBox.isChecked = false
                 checkBoxStateArray.put(position, false)
@@ -77,5 +71,23 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
 
     interface OnItemClickCallback{
         fun onItemClicked(data: todoListModel)
+    }
+
+//    fun deleteSelected(id: Int, context: Context){
+//        var dbhandler : databaseHelper ?= null
+//        var success : Boolean = false
+//        val todo : todoListModel = todoListModel()
+//        success = dbhandler?.deleteTodo(id) as Boolean
+//    }
+
+    fun updateSelected(id: Int, context: Context){
+        val isEdit = true
+        val DATA_ID = id
+        val intent = Intent(context, addTodo::class.java).also {
+            it.putExtra("IS_EDIT", isEdit)
+            it.putExtra("DATA_ID", DATA_ID)
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
     }
 }
