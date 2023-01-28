@@ -113,6 +113,6 @@ class toDoListAdapter(todoList : List<todoListModel>, internal var context : Con
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
         (context as Activity).finish()
-        //pull
+        //pullsda
     }
 }
