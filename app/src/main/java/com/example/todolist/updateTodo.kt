@@ -3,19 +3,22 @@ package com.example.todolist
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.todolist.database.databaseHelper
 import com.example.todolist.databinding.ActivityAddTodoBinding
 import com.example.todolist.model.todoListModel
 
-class addTodo : AppCompatActivity() {
+class updateTodo : AppCompatActivity() {
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//        setContentView(R.layout.activity_update_todo)
+//    }
 
     lateinit var binding: ActivityAddTodoBinding
     var dbHandler: databaseHelper? = null
     var isEdit: Boolean = false
     var data_id: Int = 0
-    var title = "Add Activity"
+    var title = "Update Activity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,7 +84,7 @@ class addTodo : AppCompatActivity() {
             startActivity(i)
             finish()
         }else{
-            Toast.makeText(applicationContext,"Something when wrong",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,"Something when wrong", Toast.LENGTH_SHORT).show()
         }
     }
 

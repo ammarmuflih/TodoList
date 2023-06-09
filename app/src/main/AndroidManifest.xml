@@ -3,19 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:launchMode="standard"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:launchMode="standard"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoList"
         tools:targetApi="31">
         <activity
-            android:name=".addTodo"
-            android:exported="false">
+            android:name=".updateTodo"
+            android:exported="false" />
+        <activity
+            android:name=".todoController"
+            android:exported="false"
+            android:noHistory="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

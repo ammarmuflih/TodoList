@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         setActionBarTitle(title)
         setContentView(binding.root)
 
+        val itemAdapter = todolistAdapter
+        itemAdapter?.setOnItemClickCallback(this)
+
         binding.addTodoButton.setOnClickListener{ toAddTodoActivity()}
 
         dbhandler = databaseHelper(this)
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         val id = item.itemId
         if (id == R.id.resetAll){
             deleteallTodo()
-            Toast.makeText(this,"Reseted", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Action one selected", Toast.LENGTH_SHORT).show()
             return true
         }
         if(id == R.id.action_two){
@@ -57,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun toAddTodoActivity(){
-        intent = Intent(this, addTodo::class.java)
+        intent = Intent(this, todoController::class.java)
         startActivity(intent)
         finish()
     }
@@ -89,5 +92,7 @@ class MainActivity : AppCompatActivity() {
         dbhandler?.reset()
         fetchList()
     }
+
+    override fun onItemClick()
 }
 
